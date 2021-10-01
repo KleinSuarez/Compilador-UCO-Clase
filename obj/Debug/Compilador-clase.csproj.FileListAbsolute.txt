@@ -1,0 +1,10 @@
+C:\Users\dartannian\source\repos\Compilador-clase\Compilador-clase\bin\Debug\Compilador-clase.exe.config
+C:\Users\dartannian\source\repos\Compilador-clase\Compilador-clase\bin\Debug\Compilador-clase.exe
+C:\Users\dartannian\source\repos\Compilador-clase\Compilador-clase\bin\Debug\Compilador-clase.pdb
+C:\Users\dartannian\source\repos\Compilador-clase\Compilador-clase\obj\Debug\Compilador-clase.csproj.AssemblyReference.cache
+C:\Users\dartannian\source\repos\Compilador-clase\Compilador-clase\obj\Debug\Compilador_clase.Properties.Resources.resources
+C:\Users\dartannian\source\repos\Compilador-clase\Compilador-clase\obj\Debug\Compilador-clase.csproj.GenerateResource.cache
+C:\Users\dartannian\source\repos\Compilador-clase\Compilador-clase\obj\Debug\Compilador-clase.csproj.CoreCompileInputs.cache
+C:\Users\dartannian\source\repos\Compilador-clase\Compilador-clase\obj\Debug\Compilador-clase.exe
+C:\Users\dartannian\source\repos\Compilador-clase\Compilador-clase\obj\Debug\Compilador-clase.pdb
+C:\Users\dartannian\source\repos\Compilador-clase\Compilador-clase\obj\Debug\Compilador_clase.Form1.resources
