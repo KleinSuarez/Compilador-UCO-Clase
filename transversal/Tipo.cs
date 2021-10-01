@@ -1,0 +1,3 @@
+public enum Tipo {
+    SIMBOLOS, LITERAL, PALABRAS_RESERVADAS
+}
