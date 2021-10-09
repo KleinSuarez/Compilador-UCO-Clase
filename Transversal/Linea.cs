@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Compilador_clase.Transversal
 {
-    class Linea
+    public class Linea
     {
         private int Numero;
         private String Contenido;

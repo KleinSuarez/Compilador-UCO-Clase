@@ -31,7 +31,7 @@ namespace Compilador_clase.AnalisisLexico
             NumeroLineaActual = NumeroLineaActual + 1;
             LineaActual = Cache.ObtenerCache().ObtenerLinea(NumeroLineaActual);
             NumeroLineaActual = LineaActual.ObtenerNumero(); //Asegura que se quede en el fin de archivo
-            Puntero = 1;
+            Puntero = 0;
 
         }
 
@@ -54,7 +54,7 @@ namespace Compilador_clase.AnalisisLexico
             {
                 CaracterActual = LineaActual.ObtenerContenido();
             }
-            else if (Puntero > LineaActual.ObtenerLongitud())
+            else if (Puntero >= LineaActual.ObtenerLongitud())
             {
                 Puntero = LineaActual.ObtenerLongitud() + 1;
                 CaracterActual = "@FL@";
@@ -76,8 +76,8 @@ namespace Compilador_clase.AnalisisLexico
 
         public void ReiniciarPuntero()
         {
-            Puntero = 1;
-            EstadoActual = 34;
+            Puntero = 0;
+            EstadoActual = 0;
             ContinuarAnalisis = true;
         }
 
@@ -363,6 +363,7 @@ namespace Compilador_clase.AnalisisLexico
 
         private void ProcesarEstado4()
         {
+            LeerSiguienteCaracter();
             if (EsLetra() || EsGuionBajo() || EsSimboloPesos() || EsDigito())
             {
                 EstadoActual = 4;
@@ -376,39 +377,34 @@ namespace Compilador_clase.AnalisisLexico
 
         private void ProcesarEstado5()
         {
-            String CATEGORIA = "SUMA";
-            int NumerodeLinea = NumeroLineaActual;
             int PosicionInicial = Puntero - Lexema.Length;
             int posicionaFinal = Puntero - 1;
-            ContinuarAnalisis = false;
 
-            Console.WriteLine("CATEGORIA GRAMATICAL: " + CATEGORIA + "LEXEMA: " + Lexema);
+            FormarComponente(Lexema, Categoria.SUMA, NumeroLineaActual, PosicionInicial, posicionaFinal, Tipo.SIMBOLO);
+            ContinuarAnalisis = false;
         }
 
         private void ProcesarEstado6()
         {
-            String CATEGORIA = "RESTA";
-            int NumerodeLinea = NumeroLineaActual;
             int PosicionInicial = Puntero - Lexema.Length;
             int posicionaFinal = Puntero - 1;
-            ContinuarAnalisis = false;
 
-            Console.WriteLine("CATEGORIA GRAMATICAL: " + CATEGORIA + "LEXEMA: " + Lexema);
+            FormarComponente(Lexema, Categoria.RESTA, NumeroLineaActual, PosicionInicial, posicionaFinal, Tipo.SIMBOLO);
+            ContinuarAnalisis = false;
         }
 
         private void ProcesarEstado7()
         {
-            String CATEGORIA = "MULTIPLICACIÓN";
-            int NumerodeLinea = NumeroLineaActual;
             int PosicionInicial = Puntero - Lexema.Length;
             int posicionaFinal = Puntero - 1;
-            ContinuarAnalisis = false;
 
-            Console.WriteLine("CATEGORIA GRAMATICAL: " + CATEGORIA + "LEXEMA: " + Lexema);
+            FormarComponente(Lexema, Categoria.MULTIPLICACION, NumeroLineaActual, PosicionInicial, posicionaFinal, Tipo.SIMBOLO);
+            ContinuarAnalisis = false;
         }
 
         private void ProcesarEstado8()
         {
+            LeerSiguienteCaracter();
             if (EsAsterisco())
             {
                 EstadoActual = 34;
@@ -423,46 +419,38 @@ namespace Compilador_clase.AnalisisLexico
 
         private void ProcesarEstado9()
         {
-            String CATEGORIA = "MODULO";
-            int NumerodeLinea = NumeroLineaActual;
             int PosicionInicial = Puntero - Lexema.Length;
             int posicionaFinal = Puntero - 1;
-            ContinuarAnalisis = false;
 
-            Console.WriteLine("CATEGORIA GRAMATICAL: " + CATEGORIA + "LEXEMA: " + Lexema);
+            FormarComponente(Lexema, Categoria.MODULO, NumeroLineaActual, PosicionInicial, posicionaFinal, Tipo.SIMBOLO);
+            ContinuarAnalisis = false;
         }
 
         private void ProcesarEstado10()
         {
-            String CATEGORIA = "ABRE PARENTESIS";
-            int NumerodeLinea = NumeroLineaActual;
             int PosicionInicial = Puntero - Lexema.Length;
             int posicionaFinal = Puntero - 1;
-            ContinuarAnalisis = false;
 
-            Console.WriteLine("CATEGORIA GRAMATICAL: " + CATEGORIA + "LEXEMA: " + Lexema);
+            FormarComponente(Lexema, Categoria.PARENTESIS_ABRE, NumeroLineaActual, PosicionInicial, posicionaFinal, Tipo.SIMBOLO);
+            ContinuarAnalisis = false;
         }
 
         private void ProcesarEstado11()
         {
-            String CATEGORIA = "CIERRA PARENTESIS";
-            int NumerodeLinea = NumeroLineaActual;
             int PosicionInicial = Puntero - Lexema.Length;
             int posicionaFinal = Puntero - 1;
-            ContinuarAnalisis = false;
 
-            Console.WriteLine("CATEGORIA GRAMATICAL: " + CATEGORIA + "LEXEMA: " + Lexema);
+            FormarComponente(Lexema, Categoria.PARENTESIS_CIERRA, NumeroLineaActual, PosicionInicial, posicionaFinal, Tipo.SIMBOLO);
+            ContinuarAnalisis = false;
         }
 
         private void ProcesarEstado12()
         {
-            String CATEGORIA = "FIN ARCHIVO";
-            int NumerodeLinea = NumeroLineaActual;
             int PosicionInicial = Puntero - Lexema.Length;
             int posicionaFinal = Puntero - 1;
-            ContinuarAnalisis = false;
 
-            Console.WriteLine("CATEGORIA GRAMATICAL: " + CATEGORIA + "LEXEMA: " + Lexema);
+            FormarComponente(Lexema, Categoria.FIN_ARCHIVO, NumeroLineaActual, PosicionInicial, posicionaFinal, Tipo.SIMBOLO);
+            ContinuarAnalisis = false;
         }
 
         private void ProcesarEstado13()
@@ -473,27 +461,23 @@ namespace Compilador_clase.AnalisisLexico
 
         private void ProcesarEstado14()
         {
-            String CATEGORIA = "NUMERO ENTERO";
             DevolverPuntero();
-            int NumerodeLinea = NumeroLineaActual;
             int PosicionInicial = Puntero - Lexema.Length;
             int posicionaFinal = Puntero - 1;
+
+            FormarComponente(Lexema, Categoria.NUMERO_ENTERO, NumeroLineaActual, PosicionInicial, posicionaFinal, Tipo.LITERAL);
             ContinuarAnalisis = false;
 
-            Console.WriteLine("CATEGORIA GRAMATICAL: " + CATEGORIA + "LEXEMA: " + Lexema);
-            
         }
 
         private void ProcesarEstado15()
         {
-            String CATEGORIA = "NUMERO DECIMAL";
             DevolverPuntero();
-            int NumerodeLinea = NumeroLineaActual;
             int PosicionInicial = Puntero - Lexema.Length;
             int posicionaFinal = Puntero - 1;
-            ContinuarAnalisis = false;
 
-            Console.WriteLine("CATEGORIA GRAMATICAL: " + CATEGORIA + "LEXEMA: " + Lexema);
+            FormarComponente(Lexema, Categoria.NUMERO_DECIMAL, NumeroLineaActual, PosicionInicial, posicionaFinal, Tipo.LITERAL);
+            ContinuarAnalisis = false;
         }
 
         private void ProcesarEstado16()
@@ -503,11 +487,8 @@ namespace Compilador_clase.AnalisisLexico
             int PosicionInicial = Puntero - Lexema.Length;
             int posicionaFinal = Puntero - 1;
 
-            FormarComponente(Lexema, Categoria.IDENTIFICADOR, NumeroLineaActual, PosicionInicial, posicionaFinal, Tipo.SIMBOLO);
+            FormarComponente(Lexema, Categoria.IDENTIFICADOR, NumeroLineaActual, PosicionInicial, posicionaFinal, Tipo.LITERAL);
             ContinuarAnalisis = false;
-            
-
-            
         }
 
         private void ProcesarEstado17()
@@ -552,17 +533,16 @@ namespace Compilador_clase.AnalisisLexico
 
         private void ProcesarEstado19()
         {
-            String CATEGORIA = "IGUAL QUE";
-            int NumerodeLinea = NumeroLineaActual;
             int PosicionInicial = Puntero - Lexema.Length;
             int posicionaFinal = Puntero - 1;
-            ContinuarAnalisis = false;
 
-            Console.WriteLine("CATEGORIA GRAMATICAL: " + CATEGORIA + "LEXEMA: " + Lexema);
+            FormarComponente(Lexema, Categoria.IGUAL_QUE, NumeroLineaActual, PosicionInicial, posicionaFinal, Tipo.SIMBOLO);
+            ContinuarAnalisis = false;
         }
 
         private void ProcesarEstado20()
         {
+            LeerSiguienteCaracter();
             if (EsMayorQue())
             {
                 EstadoActual = 23;
@@ -580,6 +560,7 @@ namespace Compilador_clase.AnalisisLexico
 
         private void ProcesarEstado21()
         {
+            LeerSiguienteCaracter();
             if (EsIgualQue())
             {
                 EstadoActual = 26;
@@ -592,6 +573,7 @@ namespace Compilador_clase.AnalisisLexico
 
         private void ProcesarEstado22()
         {
+            LeerSiguienteCaracter();
             if (EsIgualQue())
             {
                 EstadoActual = 28;
@@ -604,68 +586,56 @@ namespace Compilador_clase.AnalisisLexico
 
         private void ProcesarEstado23()
         {
-            String CATEGORIA = "DIFERENTE QUE";
-            int NumerodeLinea = NumeroLineaActual;
             int PosicionInicial = Puntero - Lexema.Length;
             int posicionaFinal = Puntero - 1;
-            ContinuarAnalisis = false;
 
-            Console.WriteLine("CATEGORIA GRAMATICAL: " + CATEGORIA + "LEXEMA: " + Lexema);
+            FormarComponente(Lexema, Categoria.DIFERENTE_QUE, NumeroLineaActual, PosicionInicial, posicionaFinal, Tipo.SIMBOLO);
+            ContinuarAnalisis = false;
         }
 
         private void ProcesarEstado24()
         {
-            String CATEGORIA = "MENOR O IGUAL QUE";
-            int NumerodeLinea = NumeroLineaActual;
             int PosicionInicial = Puntero - Lexema.Length;
             int posicionaFinal = Puntero - 1;
-            ContinuarAnalisis = false;
 
-            Console.WriteLine("CATEGORIA GRAMATICAL: " + CATEGORIA + "LEXEMA: " + Lexema);
+            FormarComponente(Lexema, Categoria.MENOR_IGUAL_QUE, NumeroLineaActual, PosicionInicial, posicionaFinal, Tipo.SIMBOLO);
+            ContinuarAnalisis = false;
         }
 
         private void ProcesarEstado25()
         {
-            String CATEGORIA = "MENOR QUE";
-            int NumerodeLinea = NumeroLineaActual;
             int PosicionInicial = Puntero - Lexema.Length;
             int posicionaFinal = Puntero - 1;
-            ContinuarAnalisis = false;
 
-            Console.WriteLine("CATEGORIA GRAMATICAL: " + CATEGORIA + "LEXEMA: " + Lexema);
+            FormarComponente(Lexema, Categoria.MENOR_QUE, NumeroLineaActual, PosicionInicial, posicionaFinal, Tipo.SIMBOLO);
+            ContinuarAnalisis = false;
         }
 
         private void ProcesarEstado26()
         {
-            String CATEGORIA = "MAYOR O IGUAL QUE";
-            int NumerodeLinea = NumeroLineaActual;
             int PosicionInicial = Puntero - Lexema.Length;
             int posicionaFinal = Puntero - 1;
-            ContinuarAnalisis = false;
 
-            Console.WriteLine("CATEGORIA GRAMATICAL: " + CATEGORIA + "LEXEMA: " + Lexema);
+            FormarComponente(Lexema, Categoria.MAYOR_IGUAL_QUE, NumeroLineaActual, PosicionInicial, posicionaFinal, Tipo.SIMBOLO);
+            ContinuarAnalisis = false;
         }
 
         private void ProcesarEstado27()
         {
-            String CATEGORIA = "MAYOR QUE";
-            int NumerodeLinea = NumeroLineaActual;
             int PosicionInicial = Puntero - Lexema.Length;
             int posicionaFinal = Puntero - 1;
-            ContinuarAnalisis = false;
 
-            Console.WriteLine("CATEGORIA GRAMATICAL: " + CATEGORIA + "LEXEMA: " + Lexema);
+            FormarComponente(Lexema, Categoria.MAYOR_QUE, NumeroLineaActual, PosicionInicial, posicionaFinal, Tipo.SIMBOLO);
+            ContinuarAnalisis = false;
         }
 
         private void ProcesarEstado28()
         {
-            String CATEGORIA = "ASIGNACIÓN";
-            int NumerodeLinea = NumeroLineaActual;
             int PosicionInicial = Puntero - Lexema.Length;
             int posicionaFinal = Puntero - 1;
-            ContinuarAnalisis = false;
 
-            Console.WriteLine("CATEGORIA GRAMATICAL: " + CATEGORIA + "LEXEMA: " + Lexema);
+            FormarComponente(Lexema, Categoria.ASIGNACION, NumeroLineaActual, PosicionInicial, posicionaFinal, Tipo.SIMBOLO);
+            ContinuarAnalisis = false;
         }
 
         private void ProcesarEstado29()
@@ -676,6 +646,7 @@ namespace Compilador_clase.AnalisisLexico
 
         private void ProcesarEstado30()
         {
+            LeerSiguienteCaracter();
             if (EsIgualQue())
             {
                 EstadoActual = 31;
@@ -689,10 +660,10 @@ namespace Compilador_clase.AnalisisLexico
 
         private void ProcesarEstado31()
         {
-            String CATEGORIA = "DIFERENTE QUE";
-            int NumerodeLinea = NumeroLineaActual;
             int PosicionInicial = Puntero - Lexema.Length;
             int posicionaFinal = Puntero - 1;
+
+            FormarComponente(Lexema, Categoria.DIFERENTE_QUE, NumeroLineaActual, PosicionInicial, posicionaFinal, Tipo.SIMBOLO);
             ContinuarAnalisis = false;
         }
 
@@ -704,18 +675,17 @@ namespace Compilador_clase.AnalisisLexico
 
         private void ProcesarEstado33()
         {
-            String CATEGORIA = "DIVISION";
             DevolverPuntero();
-            int NumerodeLinea = NumeroLineaActual;
             int PosicionInicial = Puntero - Lexema.Length;
             int posicionaFinal = Puntero - 1;
-            ContinuarAnalisis = false;
 
-            Console.WriteLine("CATEGORIA GRAMATICAL: " + CATEGORIA + "LEXEMA: " + Lexema);
+            FormarComponente(Lexema, Categoria.DIVISION, NumeroLineaActual, PosicionInicial, posicionaFinal, Tipo.SIMBOLO);
+            ContinuarAnalisis = false;
         }
 
         private void ProcesarEstado34()
         {
+            LeerSiguienteCaracter();
             if (!EsAsterisco())
             {
                 EstadoActual = 34;
@@ -729,6 +699,7 @@ namespace Compilador_clase.AnalisisLexico
 
         private void ProcesarEstado35()
         {
+            LeerSiguienteCaracter();
             if (!EsAsterisco() || !EsSlash())
             {
                 EstadoActual = 34;
@@ -747,6 +718,7 @@ namespace Compilador_clase.AnalisisLexico
 
         private void ProcesarEstado36()
         {
+            LeerSiguienteCaracter();
             if (!EsFinLinea())
             {
                 EstadoActual = 36;
@@ -858,7 +830,7 @@ namespace Compilador_clase.AnalisisLexico
 
         private bool EsFinLinea()
         {
-            return "@FL@".Equals(CaracterActual);
+            return "@FL@".Equals(CaracterActual) || "\r".Equals(CaracterActual);
         }
     }
 }

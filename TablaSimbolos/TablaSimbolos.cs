@@ -11,7 +11,7 @@ namespace Compilador_clase.TablaSimbolos
     {
         private Dictionary<String, List<ComponenteLexico>> Tabla = new Dictionary<String, List<ComponenteLexico>>();
 
-        private static TablaSimbolos INSTANCIA = new TablaSimbolos();
+        public static TablaSimbolos INSTANCIA = new TablaSimbolos();
         private TablaSimbolos()
         {
 

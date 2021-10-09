@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Compilador_clase.Transversal
 {
-    class Cache
+    public class Cache
     {
-        private static Cache INSTANCIA = new Cache();
+        public static Cache INSTANCIA = new Cache();
         private Dictionary<int, Linea> Lineas = new Dictionary<int, Linea>();
 
         private Cache() { }
