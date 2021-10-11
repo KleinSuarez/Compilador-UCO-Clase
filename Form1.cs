@@ -32,12 +32,13 @@ namespace Compilador_clase
             while (!Categoria.FIN_ARCHIVO.Equals(Componente.ObtenerCategoria()))
             {
                 MessageBox.Show(Componente.ToString());
+                LlenarTablas(Componente);
                 Componente = analizador.DevolverComponenteLexico();
             }
 
             MessageBox.Show("Análisis finalizado.");
 
-            LlenarTablas();
+            
 
 
         }
@@ -145,26 +146,74 @@ namespace Compilador_clase
 
         }
 
-        private void LlenarTablas()
+        private void LlenarTablas(ComponenteLexico componente)
         {
-            LlenarTablaSimbolos();
+            if (Tipo.SIMBOLO.Equals(componente.ObtenerTipo()))
+            {
+                LlenarTablaSimbolos(componente);
+            }else if (Tipo.LITERAL.Equals(componente.ObtenerTipo()))
+            {
+                LlenarTablaLiterales(componente);
+            }else if (Tipo.PALABRA_RESERVADA.Equals(componente.ObtenerTipo()))
+            {
+                LlenarTablaPalabrasReservadas(componente);
+            }else if (Tipo.DUMMY.Equals(componente.ObtenerTipo()))
+            {
+                LlenarTablaDummies(componente);
+            }
+
         }
 
-        private void LlenarTablaSimbolos()
+        private void LlenarTablaSimbolos(ComponenteLexico componente)
         {
-            int tamaño = TablaSimbolos.TablaSimbolos.ObtenerInstancia().ObtenerComponentes().Count;
-            for (int i = 0; i < tamaño; i++)
-            {
-                DataGridViewRow fila = new DataGridViewRow();
+            DataGridViewRow fila = new DataGridViewRow();
+            fila.CreateCells(dataGridViewSimbolos);
+            fila.Cells[0].Value = componente.ObtenerLexema();
+            fila.Cells[1].Value = componente.ObtenerCategoria();
+            fila.Cells[2].Value = componente.ObtenerNumeroLinea();
+            fila.Cells[3].Value = componente.ObtenerPosicionInicial();
+            fila.Cells[4].Value = componente.ObtenerPosicionFinal();
 
-                fila.Cells[0].Value = TablaSimbolos.TablaSimbolos.INSTANCIA.ObtenerComponentes()[i].ObtenerLexema();
-                fila.Cells[1].Value = TablaSimbolos.TablaSimbolos.INSTANCIA.ObtenerComponentes()[i].ObtenerCategoria();
-                fila.Cells[2].Value = TablaSimbolos.TablaSimbolos.INSTANCIA.ObtenerComponentes()[i].ObtenerNumeroLinea();
-                fila.Cells[3].Value = TablaSimbolos.TablaSimbolos.INSTANCIA.ObtenerComponentes()[i].ObtenerPosicionInicial();
-                fila.Cells[4].Value = TablaSimbolos.TablaSimbolos.INSTANCIA.ObtenerComponentes()[i].ObtenerPosicionFinal();
+            dataGridViewSimbolos.Rows.Add(fila);
+        }
 
-                dataGridView1.Rows.Add(fila);
-            }
+        private void LlenarTablaLiterales(ComponenteLexico componente)
+        {
+            DataGridViewRow fila = new DataGridViewRow();
+            fila.CreateCells(dataGridViewLiterales);
+            fila.Cells[0].Value = componente.ObtenerLexema();
+            fila.Cells[1].Value = componente.ObtenerCategoria();
+            fila.Cells[2].Value = componente.ObtenerNumeroLinea();
+            fila.Cells[3].Value = componente.ObtenerPosicionInicial();
+            fila.Cells[4].Value = componente.ObtenerPosicionFinal();
+
+            dataGridViewLiterales.Rows.Add(fila);
+        }
+
+        private void LlenarTablaPalabrasReservadas(ComponenteLexico componente)
+        {
+            DataGridViewRow fila = new DataGridViewRow();
+            fila.CreateCells(dataGridViewLiterales);
+            fila.Cells[0].Value = componente.ObtenerLexema();
+            fila.Cells[1].Value = componente.ObtenerCategoria();
+            fila.Cells[2].Value = componente.ObtenerNumeroLinea();
+            fila.Cells[3].Value = componente.ObtenerPosicionInicial();
+            fila.Cells[4].Value = componente.ObtenerPosicionFinal();
+
+            dataGridViewPalRes.Rows.Add(fila);
+        }
+
+        private void LlenarTablaDummies(ComponenteLexico componente)
+        {
+            DataGridViewRow fila = new DataGridViewRow();
+            fila.CreateCells(dataGridViewLiterales);
+            fila.Cells[0].Value = componente.ObtenerLexema();
+            fila.Cells[1].Value = componente.ObtenerCategoria();
+            fila.Cells[2].Value = componente.ObtenerNumeroLinea();
+            fila.Cells[3].Value = componente.ObtenerPosicionInicial();
+            fila.Cells[4].Value = componente.ObtenerPosicionFinal();
+
+            dataGridViewDummies.Rows.Add(fila);
         }
     }
 }

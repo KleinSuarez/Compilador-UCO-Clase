@@ -220,7 +220,7 @@ namespace Compilador_clase.AnalisisLexico
                 }
 
             }
-            return Componente   ;
+            return Componente;
         }
 
         private void ProcesarEstado0()
