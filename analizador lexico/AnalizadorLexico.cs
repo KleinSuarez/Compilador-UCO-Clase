@@ -136,7 +136,19 @@ public class AnalisadorSemantico
         GestorErrores.obtenerInstancia().Agregar(Error);
         throw new Exception("Se ha presentado un error, no es posible continuar el analisis lexico...");
     }
+
+
+    private void btn_1 (){
+        try{
+            analizadorSintactico analizadorSintactico = new AnalisadorSintactico();
+            analizadorSintactico.analizar(CheckBox1.Checked);
+        }catch(Exception exception) {
+            MessageBox.Show(exception.Message);
+        }
+    }
 }
+
+
 
 
 
