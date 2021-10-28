@@ -25,6 +25,7 @@ namespace Compilador_clase.Transversal
             this.Tipo = Tipo;
         }
 
+
         public static ComponenteLexico Crear(string Lexema, Categoria Categoria, Tipo Tipo)
         {
             return new ComponenteLexico(Lexema, Categoria, 0, 0, 0, Tipo);

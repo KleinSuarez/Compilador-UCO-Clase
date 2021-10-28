@@ -8,3 +8,14 @@ C:\Users\dartannian\source\repos\Compilador-clase\Compilador-clase\obj\Debug\Com
 C:\Users\dartannian\source\repos\Compilador-clase\Compilador-clase\obj\Debug\Compilador-clase.exe
 C:\Users\dartannian\source\repos\Compilador-clase\Compilador-clase\obj\Debug\Compilador-clase.pdb
 C:\Users\dartannian\source\repos\Compilador-clase\Compilador-clase\obj\Debug\Compilador_clase.Form1.resources
+C:\Code\Compilador-clase\bin\Debug\Compilador-clase.exe.config
+C:\Code\Compilador-clase\bin\Debug\Compilador-clase.exe
+C:\Code\Compilador-clase\bin\Debug\Compilador-clase.pdb
+C:\Code\Compilador-clase\obj\Debug\Compilador-clase.csproj.AssemblyReference.cache
+C:\Code\Compilador-clase\obj\Debug\Compilador-clase.csproj.SuggestedBindingRedirects.cache
+C:\Code\Compilador-clase\obj\Debug\Compilador_clase.Form1.resources
+C:\Code\Compilador-clase\obj\Debug\Compilador_clase.Properties.Resources.resources
+C:\Code\Compilador-clase\obj\Debug\Compilador-clase.csproj.GenerateResource.cache
+C:\Code\Compilador-clase\obj\Debug\Compilador-clase.csproj.CoreCompileInputs.cache
+C:\Code\Compilador-clase\obj\Debug\Compilador-clase.exe
+C:\Code\Compilador-clase\obj\Debug\Compilador-clase.pdb

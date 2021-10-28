@@ -1,4 +1,5 @@
 ﻿using Compilador_clase.AnalisisLexico;
+using Compilador_clase.AnalisisSintactico;
 using Compilador_clase.Transversal;
 using System;
 using System.Collections.Generic;
@@ -25,22 +26,17 @@ namespace Compilador_clase
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //Disparar análisis Léxico
-            AnalizadorLexico analizador = new AnalizadorLexico();
-            ComponenteLexico Componente = analizador.DevolverComponenteLexico();
-            
-            while (!Categoria.FIN_ARCHIVO.Equals(Componente.ObtenerCategoria()))
+            try
             {
-                MessageBox.Show(Componente.ToString());
-                LlenarTablas(Componente);
-                Componente = analizador.DevolverComponenteLexico();
+               AnalizadorSintactico AnalizadorSintactico = new AnalizadorSintactico();
+               AnalizadorSintactico.Analizar(enableDebug.Checked);
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
             }
 
             MessageBox.Show("Análisis finalizado.");
-
-            
-
-
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)

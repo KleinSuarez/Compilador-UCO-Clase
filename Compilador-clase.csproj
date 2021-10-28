@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AnalisisLexico\AnalizadorLexico.cs" />
+    <Compile Include="AnalisisSintactico\AnalizadorSintactico.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -95,7 +96,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AnalisisSemantico\" />
-    <Folder Include="AnalisisSintactico\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
